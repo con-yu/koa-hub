@@ -1,6 +1,6 @@
 const koaRouter = require('@koa/router')
 const { verifyAuth } = require('../middleware/login.middleware')
-const { create, list, detail, update, del } = require('../controller/moment.controller')
+const { create, list, detail, update, del, addLabels } = require('../controller/moment.controller')
 const { verifyPermission } = require('../middleware/premission.middleware')
 const { verifyLabelExist } = require('../middleware/label.middleware')
 
@@ -31,8 +31,5 @@ momentRouter.patch('/:momentId', verifyAuth, verifyPermission, update)
  *    - 所有的labels都已存在label表中
  *    - 动态2，和labels关系，添加到关系表中
  */
-momentRouter.post('/:momentId/labels', verifyAuth, verifyPermission, verifyLabelExist, (ctx) => {
-  console.log(ctx.request.body)
-  ctx.body = 'iiii'
-})
+momentRouter.post('/:momentId/labels', verifyAuth, verifyPermission, verifyLabelExist, addLabels)
 module.exports = momentRouter

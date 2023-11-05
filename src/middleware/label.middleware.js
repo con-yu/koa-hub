@@ -3,6 +3,7 @@ const { queryLabelByName, create } = require('../service/label.service')
 const verifyLabelExist = async (ctx, next) => {
   const { labels } = ctx.request.body
   // 判断labels中的所有标签是否均已存在label表
+  const newLabels = []
   for (const name of labels) {
     const res = await queryLabelByName(name)
     const labelObj = {name}
@@ -12,8 +13,11 @@ const verifyLabelExist = async (ctx, next) => {
       const insertRes = create(name)
       labelObj.id = insertRes.insertId
     }
+
+    newLabels.push(labelObj)
   }
 
+  ctx.labels = newLabels
   await next()
 }
 

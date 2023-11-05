@@ -9,7 +9,6 @@ class CommentController {
     // 评论相关信息保存在数据库
     const res = await commentService.create(content, momentId, id)
 
-    console.log(res, 'resss')
     ctx.body = {
       code: 200,
       message: '创建评论成功',

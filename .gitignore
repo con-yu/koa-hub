@@ -5,8 +5,10 @@ npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
 lerna-debug.log*
+uploads
 
 # Editor directories and files
+.env
 .idea
 .vscode
 *.suo

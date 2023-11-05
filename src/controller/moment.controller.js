@@ -44,7 +44,7 @@ class MomentController {
 
     ctx.body = {
       code: 200,
-      message:'修改动态成功！',
+      message: '修改动态成功！',
       data: res,
     }
   }
@@ -53,14 +53,37 @@ class MomentController {
     const { momentId } = ctx.params
     const res = await momentService.delMoment(momentId)
 
-    ctx.body = { 
+    ctx.body = {
       code: 200,
-      message:'删除动态成功！',
+      message: '删除动态成功！',
       data: res,
     }
   }
 
+  async addLabels(ctx) {
+    const { labels } = ctx
+    const { momentId } = ctx.params
 
+    try {
+      for (const label of labels) {
+        const hasLabel = await momentService.hasLabel(momentId, label.id)
+        if (!hasLabel) {
+          // 如果comment和label关系不存在，建立关系
+          const res = await momentService.addLabel(momentId, label.id)
+        }
+
+        ctx.body = {
+          code: 200,
+          message: '添加标签成功！',
+        }
+      }
+    } catch (error) {
+      ctx.body = {
+        code: -3001,
+        message: '为标签添加失败！',
+      }
+    }
+  }
 }
 
 module.exports = new MomentController()
