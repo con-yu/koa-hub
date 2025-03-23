@@ -1,12 +1,13 @@
-const mysql = require('mysql2')
+// const mysql = require('mysql2')
+import mysql from 'mysql2'
 
 // 创建连接池
 const connectionPool = mysql.createPool({
   user: 'root',
   host: 'localhost',
   port: 3306,
-  database: 'coderhub',
-  password: '123456',
+  database: 'test',
+  password: '147258369tx',
   connectionLimit: 5,
 })
 
@@ -19,8 +20,8 @@ connectionPool.getConnection((err, connection) => {
   connection.connect((err) => {
     if (err) {
       console.log('连接数据库失败 ❌', err)
-    } else{
-     console.log('连接数据库成功 🎉')
+    } else {
+      console.log('连接数据库成功 🎉')
     }
   })
 })
